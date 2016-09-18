@@ -13,7 +13,7 @@ class Oauth{
 	public $appid = '';
 	public $secret = '';
 	
-	public function __construct($appid, $secret)
+	public function __construct($appid = '', $secret = '')
 	{
 	    $this->appid = $appid;
 	    $this->secret = $secret;
@@ -43,12 +43,14 @@ class Oauth{
 	/**
 	 * 创建access_token（根据appid获取access_token）并存储
 	 */
-	public function createAccessToken()
+	public function createAccessToken($second = 7200)
 	{
 	    $str = str_shuffle(self::STR);
 	    $str = substr($str, 0, 32);
+	    $str .= time();
+	    $str = md5($str);
 	    $key = $this->redis_oauth_access_token_key . $str;
-		$this->setCache($key, $this->appid, 60 * 60 * 2);		//存取2个小时
+		$this->setCache($key, $this->appid, $second);		//存取2个小时
 		return $str;
 	}
 	
@@ -59,11 +61,11 @@ class Oauth{
 	{
 		$key = $this->redis_oauth_access_token_key . $access_token;
 	    $res = $this->getCache($key);
-		if($res != $this->appid)
+		if($res)
 		{
-		    return false;
+		    return $res;
 		}	
-		return true;
+		return false;
 	}
 	
 	

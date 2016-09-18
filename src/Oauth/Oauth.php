@@ -43,23 +43,23 @@ class Oauth{
 	/**
 	 * 创建access_token（根据appid获取access_token）并存储
 	 */
-	public function createAccessToken($appid)
+	public function createAccessToken()
 	{
 	    $str = str_shuffle(self::STR);
 	    $str = substr($str, 0, 32);
 	    $key = $this->redis_oauth_access_token_key . $str;
-		$this->setCache($key, $appid, 60 * 60 * 2);		//存取2个小时
+		$this->setCache($key, $this->appid, 60 * 60 * 2);		//存取2个小时
 		return $str;
 	}
 	
 	/**
 	 * 验证access_token
 	 */
-	public function checkAccessToken($access_token, $appid)
+	public function checkAccessToken($access_token)
 	{
 		$key = $this->redis_oauth_access_token_key . $access_token;
 	    $res = $this->getCache($key);
-		if($res != $appid)
+		if($res != $this->appid)
 		{
 		    return false;
 		}	

@@ -21,6 +21,7 @@ class Oauth{
 	
 	/**
 	 * 根据appid加密特定的数据
+	 * @return string
 	 */
 	public function encryptData($str)
 	{
@@ -30,6 +31,7 @@ class Oauth{
 	
 	/**
 	 * 解密数据
+	 * @return string
 	 */
 	public function decryptData($str)
 	{
@@ -42,6 +44,7 @@ class Oauth{
 	
 	/**
 	 * 创建access_token（根据appid获取access_token）并存储
+	 * @return string
 	 */
 	public function createAccessToken($second = 7200)
 	{
@@ -56,6 +59,7 @@ class Oauth{
 	
 	/**
 	 * 验证access_token
+	 * @return mixed
 	 */
 	public function checkAccessToken($access_token)
 	{
@@ -71,6 +75,7 @@ class Oauth{
 	
 	/**
 	 * 获取缓存数据
+	 * @return mixed
 	 */
 	public function getCache($key)
 	{
@@ -79,6 +84,7 @@ class Oauth{
 	
 	/**
 	 * 存储缓存数据
+	 * @return mixed
 	 */
 	public function setCache($key, $value, $second)
 	{
@@ -88,6 +94,7 @@ class Oauth{
 	
 	/**
 	 * 加密函数
+	 * @return string
 	 */
 	public function o_encrypt($str)
 	{
@@ -99,6 +106,7 @@ class Oauth{
 	
 	/**
 	 * 解密函数
+	 * @return string
 	 */
 	public function o_decrypt($str)
 	{
